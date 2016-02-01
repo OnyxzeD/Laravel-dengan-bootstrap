@@ -27,7 +27,7 @@ class BukuController extends Controller
 
     public function getData($limit = 10)
     {
-        return $this->buku->getData($limit);
+        return $this->buku->getData();
     }
 
     public function store(Request $request)
