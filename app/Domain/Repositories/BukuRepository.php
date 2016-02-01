@@ -105,7 +105,7 @@ class BukuRepository extends AbstractRepository implements Crudable, Paginable, 
     public function getData()
     {
         $data = $this->model
-            ->select('id', 'judul', 'pengarang', 'penerbit', 'kategori', 'status')
+
             ->get();
 
 //        return $response = array(

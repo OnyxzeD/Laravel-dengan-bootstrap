@@ -19,7 +19,7 @@
                     </div>
                     <div class="panel-body">
                         <div class="dataTable_wrapper">
-                            @if (count($bukus) > 0)
+
                                 <table class="table table-striped table-bordered table-hover" id="dataTables-example">
                                     <thead>
                                     <tr>
@@ -30,7 +30,7 @@
                                         <th>Aksi</th>
                                     </tr>
                                     </thead>
-                                    <tbody>
+                                    <tbody id="tampildata">
                                     {{--@foreach ($bukus as $buku)--}}
                                         {{--<tr class="">--}}
                                             {{--<td>{{ $buku->judul }}</td>--}}
@@ -53,7 +53,7 @@
                                     {{--@endforeach--}}
                                     </tbody>
                                 </table>
-                            @endif
+
                         </div>
                     </div>
                     <!-- /.panel-body -->
@@ -210,28 +210,13 @@
 
     <script src="{!! asset('bower_components/jquery/dist/jquery.min.js') !!}"></script>
     <script>
+
         $(document).ready(function () {
             $('#Create').hide();
             $('#Edit').hide();
+            getAjax();
 
-            table = $('#dataTables-example').DataTable({
-                "responsive": true,
-                "processing": true,
-//                "serverSide": true,
 
-                // Load data for the table's content from an Ajax source
-                ajax: {
-                    url: '/data-buku',
-                    dataSrc: ''
-                },
-                columns: [
-                    {data: 'judul'},
-                    {data: 'pengarang'},
-                    {data: 'penerbit'},
-                    {data: 'kategori'},
-                    {data: 'status'}
-                ]
-            });
             $("#Form-Create").submit(function (event) {
 
                 event.preventDefault();
@@ -258,7 +243,7 @@
                 posting.done(function (data) {
 //                    console.log(data);
                     window.alert(data.result.message);
-                    table.ajax.reload(null, false);
+                    getAjax();
                     Index();
                 });
             });
@@ -282,7 +267,14 @@
             $("input[name='tahun_terbit']").val('');
             $("input[name='bahasa']").val('');
         }
-
+        function getAjax() {
+            $("#tampildata").children().remove();
+            $.getJSON("/data-buku", function (data) {
+                $.each(data.slice(0,9), function (i, data) {
+                    $("#tampildata").append("<tr><td>" + data.judul + "</td><td>" + data.pengarang + "</td><td>" + data.penerbit + "</td><td>" + data.kategori + "</td><td><button type='button' class='btn btn-outline btn-info' onclick='Edit("+ data.id +")'>Edit</button><button type='button' class='btn btn-outline btn-danger' onclick='Hapus("+ data.id +")'>Delete</button></td></tr>");
+                })
+            });
+        }
         function Edit(id) {
             $('#Index').hide();
             $('#Create').hide();
@@ -334,7 +326,7 @@
                 })
                         .done(function (data) {
                             window.alert(data.result.message);
-                            table.ajax.reload(null, false);
+                            getAjax();
                             Index();
                         });
             });
@@ -350,7 +342,7 @@
                 })
                         .done(function (data) {
                             window.alert(data.result.message);
-                            table.ajax.reload(null, false);
+                            getAjax();
                             Index();
                         });
             }
