@@ -95,9 +95,9 @@
 
 <script>
     $(document).ready(function () {
-        $('#dataTables-example').DataTable({
-            responsive: true
-        });
+//        $('#dataTables-example').DataTable({
+//            responsive: true
+//        });
 
 //        $("#Submit").click(function () {
 //            $.get('/ajax-get', function (data) {

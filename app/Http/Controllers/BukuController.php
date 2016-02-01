@@ -25,6 +25,11 @@ class BukuController extends Controller
         ]);
     }
 
+    public function getData()
+    {
+        return $this->buku->getData();
+    }
+
     public function store(Request $request)
     {
         return $this->buku->create($request->all());
@@ -32,9 +37,11 @@ class BukuController extends Controller
 
     public function show($id)
     {
-        return view('partials.buku.detail', [
-            'data' => $this->buku->find($id),
-        ]);
+//        return view('partials.buku.detail', [
+//            'data' => $this->buku->find($id),
+//        ]);
+
+        return $this->buku->find($id);
     }
 
     public function edit($id)

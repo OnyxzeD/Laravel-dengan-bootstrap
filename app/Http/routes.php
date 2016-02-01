@@ -37,6 +37,8 @@ Route::get('/dashboard', function () {
 
 Route::get('buku', 'BukuController@index');
 
+Route::get('data-buku', 'BukuController@getData');
+
 Route::get('buku/{id}', 'BukuController@show');
 
 Route::get('create-buku', function () {

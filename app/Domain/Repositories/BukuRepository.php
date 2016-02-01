@@ -101,4 +101,24 @@ class BukuRepository extends AbstractRepository implements Crudable, Paginable, 
     {
         return parent::getByPage($limit, $columns);
     }
+
+    public function getData()
+    {
+        $data = $this->model
+            ->select('id', 'judul', 'pengarang', 'penerbit', 'kategori', 'status')
+            ->get();
+
+//        return $response = array(
+//            'judul'     => $data->judul,
+//            'pengarang' => $data->pengarang,
+//            'penerbit'  => $data->penerbit,
+//            'kategori'  => $data->kategori,
+//            'edit'      => "<button type='button' class='btn btn-outline btn-info' onclick='Edit({{ $data->id }})'>Edit
+//                                    </button>",
+//            'delete'    => "<button type='button' class='btn btn-outline btn-danger' onclick='Hapus({{ $buku->id }})'>
+//                                    Delete</button>"
+//        );
+
+        return $data;
+    }
 }
