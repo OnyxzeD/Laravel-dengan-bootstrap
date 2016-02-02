@@ -27,6 +27,7 @@
                                         <th>Pengarang</th>
                                         <th>Penerbit</th>
                                         <th>Kategori</th>
+                                        <th>tahun</th>
                                         <th>Aksi</th>
                                     </tr>
                                     </thead>
@@ -271,7 +272,7 @@
             $("#tampildata").children().remove();
             $.getJSON("/data-buku", function (data) {
                 $.each(data.slice(0,9), function (i, data) {
-                    $("#tampildata").append("<tr><td>" + data.judul + "</td><td>" + data.pengarang + "</td><td>" + data.penerbit + "</td><td>" + data.kategori + "</td><td><button type='button' class='btn btn-outline btn-info' onclick='Edit("+ data.id +")'>Edit</button><button type='button' class='btn btn-outline btn-danger' onclick='Hapus("+ data.id +")'>Delete</button></td></tr>");
+                    $("#tampildata").append("<tr><td>" + data.judul + "</td><td>" + data.pengarang + "</td><td>" + data.penerbit + "</td><td>" + data.kategori + "</td><td>"+ data.tahun_terbit +"</td><td><button type='button' class='btn btn-outline btn-info' onclick='Edit("+ data.id +")'>Edit</button><button type='button' class='btn btn-outline btn-danger' onclick='Hapus("+ data.id +")'>Delete</button></td></tr>");
                 })
             });
         }
