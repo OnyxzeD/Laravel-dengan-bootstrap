@@ -17,9 +17,11 @@
                             Tambah Buku
                         </button>
                     </div>
+                    <center> <div id="loader2">
+                            <img src=" {!! asset('images/download1.gif') !!}" >
+                        </div></center>
                     <div class="panel-body">
                         <div class="dataTable_wrapper">
-                            @if (count($bukus) > 0)
                                 <table class="table table-striped table-bordered table-hover" id="dataTables-example">
                                     <thead>
                                     <tr>
@@ -54,7 +56,6 @@
                                     {{--@endforeach--}}
                                     </tbody>
                                 </table>
-                            @endif
                         </div>
                     </div>
                     <!-- /.panel-body -->
@@ -71,6 +72,7 @@
                     <div class="panel-heading">
                         Tambah Buku
                     </div>
+
                     <div class="panel-body">
                         <div class="row">
                             <div class="col-lg-6">
@@ -386,12 +388,19 @@
 
         function getAjax() {
             $("#data-example").children().remove();
-            $.getJSON("/data-buku", function (data) {
+
+            $("#loader2").delay(2000).animate({
+                opacity:0,
+                width: 0,
+                height:0
+            }, 500);
+            setTimeout(function(){   $.getJSON("/data-buku", function (data) {
                 var jumlah = data.length;
                 $.each(data.slice(0, jumlah), function (i, data) {
                     $("#data-example").append("<tr><td>" + data.judul + "</td><td>" + data.pengarang + "</td><td>" + data.penerbit + "</td><td>" + data.kategori + "</td><td>" + data.status + "</td><td><button type='button' class='btn btn-outline btn-info' data-toggle='modal' data-target='#myModal' onclick='Detail(" + data.id + ")'>Detail</button> <button type='button' class='btn btn-outline btn-primary' onclick='Edit(" + data.id + ")'>Edit</button> <button type='button' class='btn btn-outline btn-danger' onclick='Hapus(" + data.id + ")'>Delete</button></td></tr>");
                 })
-            });
+            }); }, 2200);
+
         }
 
         function Index() {
