@@ -27,8 +27,10 @@ class AnggotaRepository extends AbstractRepository implements Crudable, Paginabl
 
     public function create(array $data)
     {
+        $search = $this->model->count();
+        $id = $search + 1;
         return parent::create([
-                'id'         => e($data['id']),
+                'id'         => $id,
                 'nama'       => e($data['nama']),
                 'alamat'     => e($data['alamat']),
                 'kota'       => e($data['kota']),
@@ -59,5 +61,12 @@ class AnggotaRepository extends AbstractRepository implements Crudable, Paginabl
     public function getBypage($limit = 10, array $columns = ['*'])
     {
         return parent::getByPage($limit, $columns);
+    }
+
+    public function getData()
+    {
+        return $this->model
+            ->orderBy('nama', 'asc')
+            ->get();
     }
 }

@@ -60,6 +60,8 @@ Route::post('/ajax-get', 'BukuController@ajaxGet');
 // Anggota
 Route::resource('anggota', 'AnggotaController');
 
+Route::get('data-anggota', 'AnggotaController@getData');
+
 Route::get('hapus-anggota/{id}', 'AnggotaController@destroy');
 
 Route::get('edit-anggota/{id}', 'AnggotaController@edit');

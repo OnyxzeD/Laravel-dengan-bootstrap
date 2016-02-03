@@ -24,11 +24,18 @@ class AnggotaController extends Controller
         ]);
     }
 
+    public function getData()
+    {
+        return $this->anggota->getData();
+    }
+
     public function show($id)
     {
-        return view('partials.anggota.detail', [
-            'data' => $this->anggota->find($id),
-        ]);
+//        return view('partials.anggota.detail', [
+//            'data' => $this->anggota->find($id),
+//        ]);
+
+        return $this->anggota->find($id);
     }
 
     public function edit($id)

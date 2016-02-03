@@ -3,7 +3,6 @@
 namespace App\Domain\Entities;
 
 use Illuminate\Database\Eloquent\Model;
-use App\Domain\Entities\Entities;
 
 class Anggota extends Model
 {
