@@ -14,8 +14,15 @@ use App\Domain\Contracts\Crudable;
 use App\Domain\Contracts\Paginable;
 use App\Domain\Contracts\Searchable;
 
+/**
+ * Class BukuRepository
+ * @package App\Domain\Repositories
+ */
 class BukuRepository extends AbstractRepository implements Crudable, Paginable, Searchable
 {
+    /**
+     * @param Buku $buku
+     */
     public function __construct(Buku $buku)
     {
         $this->model = $buku;
@@ -102,23 +109,12 @@ class BukuRepository extends AbstractRepository implements Crudable, Paginable, 
         return parent::getByPage($limit, $columns);
     }
 
+    /**
+     * @return mixed
+     */
     public function getData()
     {
-        $data = $this->model
-            ->select('id', 'judul', 'pengarang', 'penerbit', 'kategori', 'status')
-            ->orderBy('judul', 'asc')
-            ->get();
-
-//        return $response = array(
-//            'judul'     => $data->judul,
-//            'pengarang' => $data->pengarang,
-//            'penerbit'  => $data->penerbit,
-//            'kategori'  => $data->kategori,
-//            'edit'      => "<button type='button' class='btn btn-outline btn-info' onclick='Edit({{ $data->id }})'>Edit
-//                                    </button>",
-//            'delete'    => "<button type='button' class='btn btn-outline btn-danger' onclick='Hapus({{ $buku->id }})'>
-//                                    Delete</button>"
-//        );
+        $data = $this->model->get();
 
         return $data;
     }
